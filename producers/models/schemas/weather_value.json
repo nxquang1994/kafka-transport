@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "arrival",
+  "namespace": "com.udacity.project1.weather",
+  "fields": [
+    {"name": "temperature", "type": "float"},
+    {"name": "status", "type": "int"}
+  ]
+}
