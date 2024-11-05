@@ -26,7 +26,7 @@ TURNSTILE_TOPIC_NAME = "org.chicago.cta.stations.turnstile"
 # The summary table is created from stream
 # Apply window session to add turnstile having same key into one window
 KSQL_STATEMENT = f"""
-CREATE STREAM turnstile_stream (
+CREATE TABLE turnstile (
     station_id varchar,
     station_name varchar,
     line varchar
@@ -36,7 +36,6 @@ WITH (
     VALUE_FORMAT='AVRO',
     KEY='station_id'
 );
-    
 
 CREATE TABLE turnstile_summary WITH (
     VALUE_FORMAT='JSON',
@@ -45,8 +44,7 @@ CREATE TABLE turnstile_summary WITH (
 SELECT
     station_id AS STATION_ID,
     count(*) AS COUNT
-FROM turnstile_stream
-WINDOW SESSION (20 MINUTES)
+FROM turnstile
 GROUP BY station_id;
 """
 

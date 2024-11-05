@@ -43,7 +43,7 @@ out_topic = app.topic("org.chicago.cta.stations.table.v1.stations.transformed",
 # TODO: Define a Faust Table
 table = app.Table(
    name="transform_station_hopping",
-   default=TransformedStation,
+   default=int,
    partitions=1,
    changelog_topic=out_topic,
 ).hopping(
